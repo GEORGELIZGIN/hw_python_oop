@@ -9,7 +9,8 @@ class Calculator:
     def add_record(self, record):
         self.records.append(record)
 
-    def __get_date_stats__(self, date):  # ф-ия вычисляет amount за определнную дату
+    def __get_date_stats__(self, date):
+        # ф-ия вычисляет amount за определнную дату
         date_stats = 0
         for record in self.records:
             if record.date == date:
@@ -29,7 +30,8 @@ class Calculator:
         now = dt.datetime.now()
         current_date = now.date()
         for i in range(7):
-            week_stats += self.__get_date_stats__(current_date - dt.timedelta(days=i))
+            week_stats +=\
+                self.__get_date_stats__(current_date - dt.timedelta(days=i))
         return week_stats
 
 
@@ -50,7 +52,8 @@ class CaloriesCalculator(Calculator):
         if remained <= 0:
             return 'Хватит есть!'
         else:
-            return f'Сегодня можно съесть что-нибудь ещё, но с общей калорийностью не более {remained} кКал'
+            return f'Сегодня можно съесть что-нибудь ещё, ' \
+                   f'но с общей калорийностью не более {remained} кКал'
 
 
 class CashCalculator(Calculator):
@@ -69,6 +72,8 @@ class CashCalculator(Calculator):
         if remained == 0:
             return 'Денег нет, держись'
         elif remained > 0:
-            return f'На сегодня осталось {round(remained, 2)} {currency_for_answer[currency]}'
+            return f'На сегодня осталось ' \
+                   f'{round(remained, 2)} {currency_for_answer[currency]}'
         elif remained < 0:
-            return f'Денег нет, держись: твой долг - {round(abs(remained), 2)} {currency_for_answer[currency]}'
+            return f'Денег нет, держись: ' \
+                   f'твой долг - {round(abs(remained), 2)} {currency_for_answer[currency]}'
