@@ -62,7 +62,7 @@ class CashCalculator(Calculator):
 
     def get_today_cash_remained(self, currency):
         remained = 0
-        currency_for_answer = {'rub': 'руб', 'usd': 'USD', 'eur': 'Euro'}
+        currency_for_ans = {'rub': 'руб', 'usd': 'USD', 'eur': 'Euro'}
         if currency == 'rub':
             remained = super().get_today_remained()
         elif currency == 'usd':
@@ -73,7 +73,7 @@ class CashCalculator(Calculator):
             return 'Денег нет, держись'
         elif remained > 0:
             return f'На сегодня осталось ' \
-                   f'{round(remained, 2)} {currency_for_answer[currency]}'
+                   f'{round(remained, 2)} {currency_for_ans[currency]}'
         elif remained < 0:
-            return f'Денег нет, держись: ' \
-                   f'твой долг - {round(abs(remained), 2)} {currency_for_answer[currency]}'
+            return f'Денег нет, держись: твой долг - ' \
+                   f'{round(abs(remained), 2)} {currency_for_ans[currency]}'
