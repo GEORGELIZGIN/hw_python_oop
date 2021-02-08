@@ -55,8 +55,9 @@ class CaloriesCalculator(Calculator):
         remained = super().get_today_remained()
         if remained <= 0:
             return 'Хватит есть!'
-        return f'Сегодня можно съесть что-нибудь ещё, ' \
-               f'но с общей калорийностью не более {remained} кКал'
+        return (
+            f'Сегодня можно съесть что-нибудь ещё, но с общей калорийностью не более {remained} кКал'
+        )
 
 
 class CashCalculator(Calculator):
@@ -64,20 +65,23 @@ class CashCalculator(Calculator):
     EURO_RATE = 89.92
 
     def get_today_cash_remained(self, currency):
-        remained = 0
         currency_for_ans = {
             'rub': ('руб', 1),
             'usd': ('USD', self.USD_RATE),
             'eur': ('Euro', self.EURO_RATE)
         }
         if currency not in currency_for_ans:
-            raise KeyError
-        remained = super().get_today_remained() / currency_for_ans[currency][1]
+            return 'Неправильный код валюты'
+        name, rate = currency_for_ans[currency]
+        remained = super().get_today_remained() / rate
+        remained_rounded = round(remained, 2)
         if remained == 0:
             return 'Денег нет, держись'
         elif remained > 0:
-            return f'На сегодня осталось ' \
-                   f'{round(remained, 2)} {currency_for_ans[currency][0]}'
+            return (
+                f'На сегодня осталось {remained_rounded} {name}'
+            )
         elif remained < 0:
-            return f'Денег нет, держись: твой долг - ' \
-                   f'{round(abs(remained), 2)} {currency_for_ans[currency][0]}'
+            return (
+                f'Денег нет, держись: твой долг - {abs(remained_rounded)} {name}'
+            )
