@@ -56,7 +56,8 @@ class CaloriesCalculator(Calculator):
         if remained <= 0:
             return 'Хватит есть!'
         return (
-            f'Сегодня можно съесть что-нибудь ещё, но с общей калорийностью не более {remained} кКал'
+            'Сегодня можно съесть что-нибудь ещё, ' +
+            f'но с общей калорийностью не более {remained} кКал'
         )
 
 
@@ -83,5 +84,6 @@ class CashCalculator(Calculator):
             )
         elif remained < 0:
             return (
-                f'Денег нет, держись: твой долг - {abs(remained_rounded)} {name}'
+                'Денег нет, держись: ' +
+                f'твой долг - {abs(remained_rounded)} {name}'
             )
